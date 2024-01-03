@@ -22,16 +22,32 @@
     <link rel="stylesheet" href="admin/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="admin/assets/images/favicon.png" />
+    <style type="text/css">
+  .div_center{
+    text-align: center;
+    padding-top: 40px;
+  
+  }
+  .h2_font{
+    font-size: 40px;
+    padding-bottom: 40px;
+  }
+  .input_color{
+    color:black;
+  }
+  .center{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 30px;
+    border: 3px solid white;
+  }
+  .data_color{
+    color: black;
+  }
+
+ </style>
   </head>
-  @if(session()->has('message'))
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong> {{session()->get('message')}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-              
-            @endif
   <body>
     <div class="container-scroller">
    
@@ -43,7 +59,44 @@
         @include('admin.navbar')
         <!-- partial -->
         <div class="main-panel">
-        @include('admin.body')
+       <div class="container" style="width: auto; background-color: white; margin-top:20px">
+       <h1 style="width: auto; color:black; margin-top: 40px;">View All Appointments</h1>
+       <table class="center table table-success table-striped" style="margin-bottom:20px">
+                <tr>
+           
+                  <td class="data_color">Name</td>
+                  <td class="data_color">Phone</td>
+                  <td class="data_color">Email</td>
+                  <td class="data_color">Doctor</td>
+                  <td class="data_color">Date</td>
+                  <td class="data_color">Message</td>
+                  <td class="data_color">Status</td>
+                  <td class="data_color">Action</td>
+            
+                </tr>
+                @foreach($appointments as $appointments)
+                <tr>
+                
+                  <td class="data_color">{{$appointments->name}}</td>
+                  <td class="data_color">{{$appointments->phone}}</td>
+                  <td class="data_color">{{$appointments->email}}</td>
+                  <td class="data_color">{{$appointments->doctor}}</td>
+                  <td class="data_color">{{$appointments->date}}</td>
+                  <td class="data_color">{{$appointments->message}}</td>
+                  <td class="data_color">{{$appointments->status}}</td>               
+                  <td>
+                    
+                    <a   class="btn btn-primary" href="{{url('show_edit_Form_appointment',$appointments->id)}}">Edit</a>
+                    <a onclick="return confirm('Are you sure you want to remove this?')" class="btn btn-danger" href=" ">Delete</a>
+                </td>
+                  
+
+             
+                  
+                </tr>
+                @endforeach
+              </table>
+       </div>
           
           <!-- partial -->
         </div>
